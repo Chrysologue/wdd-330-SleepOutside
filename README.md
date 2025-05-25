@@ -7,6 +7,8 @@
 
  - https://byui-cse.github.io/wdd330-ww-course/week01/team.html
 
+### Production link on Netlify
+* [https://creative-capybara-a6478a.netlify.app/](https://creative-capybara-a6478a.netlify.app/)
 ### Prerequisites
 
 - You must have Node installed to run the following commands.
