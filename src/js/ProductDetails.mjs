@@ -7,7 +7,15 @@ export class ProductDetails {
     }
     addProductToCart(product) {
         const cartItems = getLocalStorage("so-cart") || [];
-        cartItems.push(product);
+        const existingItem = cartItems.find(item => item.Id == product.Id);
+        if (existingItem) {
+            existingItem.quantity = (existingItem.quantity || 1) + 1;
+        }
+        else {
+            const itemWithQuantity = { ...product, quantity: 1 }
+            cartItems.push(itemWithQuantity);
+        }
+
         setLocalStorage("so-cart", cartItems);
     }
     renderProductDetails() {
@@ -18,7 +26,11 @@ export class ProductDetails {
         this.product = await this.dataSource.findProductById(this.productId);
         this.renderProductDetails();
         document.getElementById('addToCart')
-            .addEventListener('click', () => this.addProductToCart(this.product));
+            .addEventListener('click', () => {
+                this.addProductToCart(this.product)
+                window.alert(`${this.product.NameWithoutBrand} added.`)
+            });
+
     }
 }
 function productDetailsTemplate(item) {

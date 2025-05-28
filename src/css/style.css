@@ -177,6 +177,9 @@ button {
   max-width: 250px;
 }
 
+.hide {
+  display: none;
+}
 .product-card h2,
 .product-card h3,
 .product-card p {
