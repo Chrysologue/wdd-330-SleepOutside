@@ -86,3 +86,16 @@ function updateCartCount()
     }
   }
 }
+
+export function updateHeading(category)
+{
+    const heading = document.querySelector(".products h2");
+    if(category == "sleeping-bags")
+    {
+        heading.textContent = `Top Products: Sleeping Bags`;
+    }
+    else {
+        heading.textContent = `Top Products: ${category}`;
+    }
+    
+}
