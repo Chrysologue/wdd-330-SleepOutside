@@ -122,6 +122,19 @@ button {
   position: relative;
   text-align: center;
 }
+.cart .cart-count {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  background-color: red;
+  color: rgb(0, 0, 0);
+  border-radius: 50%;
+  top: 6px;
+  right: 2px;
+  font-size: 15px;
+  text-align: center;
+  font-weight: bold;
+}
 
 .cart svg {
   width: 25px;
