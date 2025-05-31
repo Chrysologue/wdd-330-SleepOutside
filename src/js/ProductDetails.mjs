@@ -1,9 +1,21 @@
 import { setLocalStorage, getLocalStorage } from "./utils.mjs";
+
 export class ProductDetails {
     constructor(productId, dataSource) {
         this.productId = productId;
         this.dataSource = dataSource;
         this.product = {};
+    }
+
+    async init() {
+        this.product = await this.dataSource.findProductById(this.productId);
+        this.renderProductDetails();
+        document.getElementById('addToCart')
+            .addEventListener('click', () => {
+                this.addProductToCart(this.product)
+                window.alert(`${this.product.NameWithoutBrand} added.`)
+            });
+
     }
     addProductToCart(product) {
         const cartItems = getLocalStorage("so-cart") || [];
@@ -22,23 +34,13 @@ export class ProductDetails {
         document.querySelector("main").innerHTML = productDetailsTemplate(this.product);
 
     }
-    async init() {
-        this.product = await this.dataSource.findProductById(this.productId);
-        this.renderProductDetails();
-        document.getElementById('addToCart')
-            .addEventListener('click', () => {
-                this.addProductToCart(this.product)
-                window.alert(`${this.product.NameWithoutBrand} added.`)
-            });
-
-    }
 }
 function productDetailsTemplate(item) {
     return `<section class="product-detail">
         <h3>${item.Brand.Name}</h3>
         <h2 class="divider">${item.NameWithoutBrand}</h2>
         <img class="divider"
-                src="${item.Image}"
+                src="${item.Images.PrimaryLarge}"
                 alt="${item.NameWithoutBrand}" />
         <p class="product-card__price">$${item.FinalPrice}</p>
         <p class="product__color">${item.Colors[0].ColorName}</p>
