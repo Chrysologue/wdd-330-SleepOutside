@@ -1,16 +1,18 @@
 import { getLocalStorage, loadHeaderFooter } from "./utils.mjs";
 
 function renderCartContents() {
-  const cartItems = getLocalStorage("so-cart") ;
+  const cartItems = getLocalStorage("so-cart");
   const parentElement = document.querySelector(".cart-footer");
   if (cartItems && cartItems.length > 0) {
     const htmlItems = cartItems.map((item) => cartItemTemplate(item));
-    const totalPrice = cartItems.reduce((sum, item) => sum + (item.FinalPrice * item.quantity), 0)
+    const totalPrice = cartItems.reduce(
+      (sum, item) => sum + item.FinalPrice * item.quantity,
+      0,
+    );
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
     parentElement.classList.remove("hide");
     document.querySelector(".cart-total").textContent = `Total: $${totalPrice}`;
-  }
-  else {
+  } else {
     parentElement.classList.add("hide");
   }
 }
