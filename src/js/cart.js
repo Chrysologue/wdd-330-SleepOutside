@@ -39,4 +39,3 @@ function cartItemTemplate(item) {
 
 renderCartContents();
 loadHeaderFooter();
-
