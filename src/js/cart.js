@@ -11,7 +11,8 @@ function renderCartContents() {
     );
     document.querySelector(".product-list").innerHTML = htmlItems.join("");
     parentElement.classList.remove("hide");
-    document.querySelector(".cart-total").textContent = `Total: $${totalPrice}`;
+    document.querySelector(".cart-total").textContent =
+      `Total: $${totalPrice.toFixed(2)}`;
   } else {
     parentElement.classList.add("hide");
   }
@@ -21,8 +22,8 @@ function cartItemTemplate(item) {
   const newItem = `<li class="cart-card divider">
   <a href="#" class="cart-card__image">
     <img
-      src="${item.Image}"
-      alt="${item.Name}"
+      src="${item.Images.PrimaryLarge}"
+      alt="${item.NameWithoutBrand}"
     />
   </a>
   <a href="#">
@@ -38,3 +39,4 @@ function cartItemTemplate(item) {
 
 renderCartContents();
 loadHeaderFooter();
+

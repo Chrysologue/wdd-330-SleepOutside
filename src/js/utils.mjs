@@ -75,13 +75,14 @@ function updateCartCount()
   const cartItems = getLocalStorage("so-cart") || [];
   const cartFooter = qs(".cart-count");
   const cartCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-  if(cartItems.length > 0)
-  {
-    cartFooter.textContent = cartCount
-    cartFooter.style.display = "block";
+  if(cartFooter) { // <-- Add this check
+    if(cartItems.length > 0)
+    {
+      cartFooter.textContent = cartCount
+      cartFooter.style.display = "block";
+    }
+    else {
+      cartFooter.style.display = "none";
+    }
   }
-  else {
-    cartFooter.style.display = "none";
-  }
-  
 }
