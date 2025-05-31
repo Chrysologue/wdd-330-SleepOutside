@@ -40,3 +40,31 @@ export function renderListWithTemplate (templateFn, parentElement, list, positio
   const htmls = list.map(item => templateFn(item)).join("");
   parentElement.insertAdjacentHTML(position, htmls)
 }
+
+function renderWithTemplate (template, parentElement, data, callback)
+{
+  if(callback)
+  {
+    callback(data)
+  }
+  parentElement.innerHTML = template;
+}
+
+async function loadTemplate(url)
+{
+  const response = await fetch(url);
+  if(!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}, ${response.statusText}`);
+  }
+  const data = await response.text(); 
+  return data;
+}
+export async function loadHeaderFooter()
+{
+  const headerTemplate = await loadTemplate("../partials/header.html");
+  const footerTemplate = await loadTemplate("../partials/footer.html");
+  const header = qs("#header");
+  const footer = qs("footer");
+  renderWithTemplate(headerTemplate, header);
+  renderWithTemplate(footerTemplate, footer);
+}
